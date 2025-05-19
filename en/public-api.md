@@ -1,59 +1,59 @@
-## Network > Internet Gateway > API v2 가이드
+## Network > Internet Gateway > API v2 Guide
 
-API를 사용하려면 API 엔드포인트와 토큰 등이 필요합니다. [API 사용 준비](/Compute/Compute/ko/identity-api/)를 참고하여 API 사용에 필요한 정보를 준비합니다.
+To use the API, API endpoint and token are required. Refer to [API usage preparations](/Compute/Compute/en/identity-api/) to prepare the information required to use the API.
 
-인터넷 게이트웨이 API는 `network` 타입 엔드포인트를 이용합니다. 정확한 엔드포인트는 토큰 발급 응답의 `serviceCatalog`를 참조합니다.
+The Internet Gateway API utilizes an endpoint of type `network`. The exact endpoint is referenced in the `serviceCatalog`of the token issuance response.
 
-| 타입 | 리전 | 엔드포인트 |
+| Type | Region | Endpoint |
 |---|---|---|
-| network | 한국(판교) 리전<br>한국(평촌) 리전<br>일본(도쿄) 리전<br>미국(캘리포니아) 리전 | https://kr1-api-network-infrastructure.nhncloudservice.com<br>https://kr2-api-network-infrastructure.nhncloudservice.com<br>https://jp1-api-network-infrastructure.nhncloudservice.com<br>https://us1-api-network-infrastructure.nhncloudservice.com |
+| network | Korea (Pangyo) Region<br>Korea (Pyeongchon) region<br>Japan (Tokyo) Region<br>United States (California) region | https://kr1-api-network-infrastructure.nhncloudservice.com<br>https://kr2-api-network-infrastructure.nhncloudservice.com<br>https://jp1-api-network-infrastructure.nhncloudservice.com<br>https://us1-api-network-infrastructure.nhncloudservice.com |
 
-API 응답에 가이드에 명시되지 않은 필드가 나타날 수 있습니다. 이런 필드는 NHN Cloud 내부 용도로 사용되며 사전 공지 없이 변경될 수 있으므로 사용하지 않습니다.
+In each API response, you may find fields that are not specified within this guide. Those fields are for NHN Cloud internal usage, so refrain from using them because they may be changed without prior notice.
 
-## 인터넷 게이트웨이
-### 외부 네트워크 ID 조회하기
-인터넷 게이트웨이를 생성할 때, 인터넷 게이트웨이를 통해 연결할 외부 네트워크의 ID를 지정해야 합니다.
-사용할 수 있는 외부 네트워크는 [VPC 목록 보기 API](/Network/VPC/ko/public-api/#vpc_1)에 `router:external=true` 쿼리를 지정하여 조회할 수 있습니다.
+## Internet Gateway
+### Get an external network ID
+When you create an Internet gateway, you must specify the ID of the external network to which you want to connect through the Internet gateway.
+The available external networks can be queried by specifying the `router:external=true` query to [the VPC list view API](/Network/VPC/ko/public-api/#vpc_1).
 ```
 GET /v2.0/vpcs?router:external=true
 ```
 
-### 인터넷 게이트웨이 목록 보기
-사용 가능한 인터넷 게이트웨이 목록을 반환합니다.
+### View a list of Internet gateways
+Returns a list of available internet gateways.
 ```
 GET /v2.0/internetgateways
 X-Auth-Token: {tokenId}
 ```
 
-#### 요청
-이 API는 요청 본문을 요구하지 않습니다.
+#### Request
+This API does not require a request body.
 
 
-| 이름 | 종류 | 형식 | 필수 | 설명 |
+| Name | Type | Format | Required | Description |
 | --- | --- | --- | --- | --- |
-| tokenId | Header | String | O | 토큰 ID |
-| tenant_id | Query | String | - | 조회할 인터넷 게이트웨이가 속한 테넌트 |
-| id | Query | UUID | - | 조회할 인터넷 게이트웨이 ID |
-| name | Query | String | - | 조회할 인터넷 게이트웨이 이름 |
-| external_network_id | Query | UUID | - | 조회할 인터넷 게이트웨이가 연결한 외부 네트워크의 ID |
-| routingtable_id | Query | UUID | - | 조회할 인터넷 게이트웨이를 연결한 라우팅 테이블의 ID |
+| tokenId | Header | String | O | Token ID |
+| tenant_id | Query | String | - | The tenant to which the Internet gateway you want to look up belongs to |
+| id | Query | UUID | - | Internet gateway ID to look up |
+| name | Query | String | - | Internet gateway name to look up |
+| external_network_id | Query | UUID | - | The ID of the external network to which the Internet gateway is connected. |
+| routingtable_id | Query | UUID | - | The ID of the routing table associated with the Internet gateway you want to look up. |
 
-#### 응답
+#### Response
 
-| 이름 | 종류 | 형식 | 설명 |
+| Name | Type | Format | Description |
 | --- | --- | --- | --- |
-| internetgateways | Body | Array | 인터넷 게이트웨이 정보 객체 목록 |
-| internetgateway.id | Body | UUID | 인터넷 게이트웨이 ID |
-| internetgateway.name | Body | String | 인터넷 게이트웨이 이름 |
-| internetgateway.external_network_id | Body | UUID | 인터넷 게이트웨이가 연결한 외부 네트워크의 ID |
-| internetgateway.routingtable_id | Body | UUID | 라우팅 테이블과 연결되어 있을 때, 인터넷 게이트웨이를 연결한 라우팅 테이블 ID |
-| internetgateway.state | Body | String | 인터넷 게이트웨이의 상태. <br>`available`: 정상 상태<br>`unavailable`: 라우팅 테이블에 연결되지 않은 미사용 상태<br>`migrating`: 점검을 위해 다른 인터넷 게이트웨이 서버로 이동중인 상태<br>`error`:  라우팅 테이블에 연결되었으나 정상 사용이 불가능한 상태|
-| internetgateway.create_time | Body | Date | 인터넷 게이트웨이 생성 시간(UTC) |
-| internetgateway.tenant_id | Body | String | 인터넷 게이트웨이가 속한 테넌트 ID |
-| internetgateway.migrate_status | Body | String | 점검으로 인한 인터넷 게이트웨이 이동 시 처리 상태<br>`none`: 이동중이지 않거나 이동이 완료된 상태<br>`unbinding_progress`: 기존 인터넷 게이트웨이 서버에서 제거 중인 상태<br>`unbinding_error`: 기존 인터넷 게이트웨이 서버에서 제거 중 오류 발생<br>`binding_progress`: 신규 인터넷 게이트웨이 서버에서 구성 중인 상태<br>`binding_error`: 신규 인터넷 게이트웨이 서버에서 구성 중 오류 발생 |
-| internetgateway.migrate_error | Body | String | 점검으로 인한 인터넷 게이트웨이 이동 중 오류 발생 시 오류 메시지 |
+| internetgateways | Body | Array | List of Internet Gateway Information Objects |
+| internetgateway.id | Body | UUID | Internet gateway ID |
+| internetgateway.name | Body | String | Internet gateway name |
+| internetgateway.external_network_id | Body | UUID | The identity of the external network to which the Internet gateway is connected. |
+| internetgateway.routingtable_id | Body | UUID | The routing table ID with which the Internet gateway is associated when it is associated with a routing table. |
+| internetgateway.state | Body | String | The status of the Internet gateway. <br>`available`: Steady state<br>`unavailable`: Unused, not connected to routing table<br>`migrating`: The state of being moved to another Internet Gateway server for maintenance.<br>`ERROR`: Connected to routing table but unavailable for normal use|
+| internetgateway.create_time | Body | Date | Internet gateway creation time (UTC) |
+| internetgateway.tenant_id | Body | String | The tenant ID to which the Internet gateway belongs |
+| internetgateway.migrate_status | Body | String | Processing status when moving internet gateways due to maintenance<br>`none`: not moving or the move is complete<br>`unbinding_progress`: Status of `unbinding` from existing Internet Gateway servers<br>`unbinding_error`: Error uninstalling from existing internet gateway server<br>`binding_progress`: Status of configuration on the new Internet Gateway server<br>`binding_error`: Error configuring on new Internet Gateway server |
+| internetgateway.migrate_error | Body | String | Error messages when the internet gateway is moving due to maintenance |
 
-<details><summary>예시</summary>
+<details><summary>Example</summary>
 <p>
 
 ```json
@@ -79,38 +79,38 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### 인터넷 게이트웨이 보기
-지정한 인터넷 게이트웨이를 조회합니다.
+### View Internet Gateways
+Looks up the specified internet gateway.
 ```
 GET /v2.0/internetgateways/{internetgatewayId}
 X-Auth-Token: {tokenId}
 ```
 
-#### 요청
+#### Request
 
-이 API는 요청 본문을 요구하지 않습니다.
+This API does not require a request body.
 
-| 이름 | 종류 | 형식 | 필수 | 설명 |
+| Name | Type | Format | Required | Description |
 | --- | --- | --- | --- | --- |
-| internetgatewayId | URL | UUID | O | 조회할 라우팅 테이블 ID |
-| tokenId | Header | String | O | 토큰 ID |
+| internetgatewayId | URL | UUID | O | Routing table ID to query |
+| tokenId | Header | String | O | Token ID |
 
-#### 응답
+#### Response
 
-| 이름 | 종류 | 형식 | 설명 |
+| Name | Type | Format | Description |
 | --- | --- | --- | --- |
-| internetgateway | Body | Array | 인터넷 게이트웨이 정보 객체 |
-| internetgateway.id | Body | UUID | 인터넷 게이트웨이 ID |
-| internetgateway.name | Body | String | 인터넷 게이트웨이 이름 |
-| internetgateway.external_network_id | Body | UUID | 인터넷 게이트웨이가 연결한 외부 네트워크의 ID |
-| internetgateway.routingtable_id | Body | UUID | 라우팅 테이블과 연결되어 있을 때, 인터넷 게이트웨이를 연결한 라우팅 테이블 ID |
-| internetgateway.state | Body | String | 인터넷 게이트웨이의 상태. <br>`available`: 정상 상태<br>`unavailable`: 라우팅 테이블에 연결되지 않은 미사용 상태<br>`migrating`: 점검을 위해 다른 인터넷 게이트웨이 서버로 이동중인 상태<br>`error`:  라우팅 테이블에 연결되었으나 정상 사용이 불가능한 상태|
-| internetgateway.create_time | Body | Date | 인터넷 게이트웨이 생성 시간(UTC) |
-| internetgateway.tenant_id | Body | String | 인터넷 게이트웨이가 속한 테넌트 ID |
-| internetgateway.migrate_status | Body | String | 점검으로 인한 인터넷 게이트웨이 이동 시 처리 상태<br>`none`: 이동중이지 않거나 이동이 완료된 상태<br>`unbinding_progress`: 기존 인터넷 게이트웨이 서버에서 제거 중인 상태<br>`unbinding_error`: 기존 인터넷 게이트웨이 서버에서 제거 중 오류 발생<br>`binding_progress`: 신규 인터넷 게이트웨이 서버에서 구성 중인 상태<br>`binding_error`: 신규 인터넷 게이트웨이 서버에서 구성 중 오류 발생 |
-| internetgateway.migrate_error | Body | String | 점검으로 인한 인터넷 게이트웨이 이동 중 오류 발생 시 오류 메시지.  |
+| internetgateway | Body | Array | Internet Gateway Information Object |
+| internetgateway.id | Body | UUID | Internet gateway ID |
+| internetgateway.name | Body | String | Internet gateway name |
+| internetgateway.external_network_id | Body | UUID | The identity of the external network to which the Internet gateway is connected. |
+| internetgateway.routingtable_id | Body | UUID | The routing table ID with which the Internet gateway is associated when it is associated with a routing table. |
+| internetgateway.state | Body | String | The status of the Internet gateway. <br>`available`: Steady state<br>`unavailable`: Unused, not connected to routing table<br>`migrating`: The state of being moved to another Internet Gateway server for maintenance.<br>`ERROR`: Connected to routing table but unavailable for normal use|
+| internetgateway.create_time | Body | Date | Internet gateway creation time (UTC) |
+| internetgateway.tenant_id | Body | String | The tenant ID to which the Internet gateway belongs |
+| internetgateway.migrate_status | Body | String | Processing status when moving internet gateways due to maintenance<br>`none`: not moving or the move is complete<br>`unbinding_progress`: Status of `unbinding` from existing Internet Gateway servers<br>`unbinding_error`: Error uninstalling from existing internet gateway server<br>`binding_progress`: Status of configuration on the new Internet Gateway server<br>`binding_error`: Error configuring on new Internet Gateway server |
+| internetgateway.migrate_error | Body | String | Error messages when the internet gateway is moving due to maintenance |
 
-<details><summary>예시</summary>
+<details><summary>Example</summary>
 <p>
 
 ```json
@@ -134,40 +134,40 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### 인터넷 게이트웨이 생성하기
+### Create an Internet gateway
 
-새로운 인터넷 게이트웨이를 생성합니다.
+Create a new internet gateway.
 
 ```
 POST /v2.0/internetgateways
 X-Auth-Token: {tokenId}
 ```
 
-#### 요청
+#### Request
 
-| 이름 | 종류 | 형식 | 필수 | 설명 |
+| Name | Type | Format | Required | Description |
 | --- | --- | --- | --- | --- |
-| tokenId | Header | String | O | 토큰 ID |
-| internetgateway | Body | Object | O | 생성할 인터넷 게이트웨이 정보 객체 |
-| internetgateway.name | Body | String | O | 인터넷 게이트웨이 이름 |
-| internetgateway.external_network_id | Body | O | UUID | 인터넷 게이트웨이가 연결할 외부 네트워크 ID |
+| tokenId | Header | String | O | Token ID |
+| internetgateway | Body | Object | O | Internet Gateway information object to create |
+| internetgateway.name | Body | String | O | Internet gateway name |
+| internetgateway.external_network_id | Body | O | UUID | The external network ID for the Internet Gateway to connect to |
 
-#### 응답
+#### Response
 
-| 이름 | 종류 | 형식 | 설명 |
+| Name | Type | Format | Description |
 | --- | --- | --- | --- |
-| internetgateway | Body | Array | 인터넷 게이트웨이 정보 객체 |
-| internetgateway.id | Body | UUID | 인터넷 게이트웨이 ID |
-| internetgateway.name | Body | String | 인터넷 게이트웨이 이름 |
-| internetgateway.external_network_id | Body | UUID | 인터넷 게이트웨이가 연결한 외부 네트워크의 ID |
-| internetgateway.routingtable_id | Body | UUID | 라우팅 테이블과 연결되어 있을 때, 인터넷 게이트웨이를 연결한 라우팅 테이블 ID |
-| internetgateway.state | Body | String | 인터넷 게이트웨이의 상태. <br>`available`: 정상 상태<br>`unavailable`: 라우팅 테이블에 연결되지 않은 미사용 상태<br>`migrating`: 점검을 위해 다른 인터넷 게이트웨이 서버로 이동중인 상태<br>`error`:  라우팅 테이블에 연결되었으나 정상 사용이 불가능한 상태|
-| internetgateway.create_time | Body | Date | 인터넷 게이트웨이 생성 시간(UTC) |
-| internetgateway.tenant_id | Body | String | 인터넷 게이트웨이가 속한 테넌트 ID |
-| internetgateway.migrate_status | Body | String | 점검으로 인한 인터넷 게이트웨이 이동 시 처리 상태<br>`none`: 이동중이지 않거나 이동이 완료된 상태<br>`unbinding_progress`: 기존 인터넷 게이트웨이 서버에서 제거 중인 상태<br>`unbinding_error`: 기존 인터넷 게이트웨이 서버에서 제거 중 오류 발생<br>`binding_progress`: 신규 인터넷 게이트웨이 서버에서 구성 중인 상태<br>`binding_error`: 신규 인터넷 게이트웨이 서버에서 구성 중 오류 발생 |
-| internetgateway.migrate_error | Body | String | 점검으로 인한 인터넷 게이트웨이 이동 중 오류 발생 시 오류 메시지.  |
+| internetgateway | Body | Array | Internet Gateway Information Object |
+| internetgateway.id | Body | UUID | Internet gateway ID |
+| internetgateway.name | Body | String | Internet gateway name |
+| internetgateway.external_network_id | Body | UUID | The identity of the external network to which the Internet gateway is connected. |
+| internetgateway.routingtable_id | Body | UUID | The routing table ID with which the Internet gateway is associated when it is associated with a routing table. |
+| internetgateway.state | Body | String | The status of the Internet gateway. <br>`available`: Steady state<br>`unavailable`: Unused, not connected to routing table<br>`migrating`: The state of being moved to another Internet Gateway server for maintenance.<br>`ERROR`: Connected to routing table but unavailable for normal use|
+| internetgateway.create_time | Body | Date | Internet gateway creation time (UTC) |
+| internetgateway.tenant_id | Body | String | The tenant ID to which the Internet gateway belongs |
+| internetgateway.migrate_status | Body | String | Processing status when moving internet gateways due to maintenance<br>`none`: not moving or the move is complete<br>`unbinding_progress`: Status of `unbinding` from existing Internet Gateway servers<br>`unbinding_error`: Error uninstalling from existing internet gateway server<br>`binding_progress`: Status of configuration on the new Internet Gateway server<br>`binding_error`: Error configuring on new Internet Gateway server |
+| internetgateway.migrate_error | Body | String | Error messages when the internet gateway is moving due to maintenance |
 
-<details><summary>예시</summary>
+<details><summary>Example</summary>
 <p>
 
 ```json
@@ -189,27 +189,27 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### 인터넷 게이트웨이 삭제하기
+### Delete an Internet gateway
 
-인터넷 게이트웨이를 삭제합니다. 
+Delete the internet gateway. 
 
 ```
 DELETE /v2.0/internetgateways/{internetgatewayId}
 X-Auth-Token: {tokenId}
 ```
 
-#### 요청
+#### Request
 
-이 API는 요청 본문을 요구하지 않습니다.
+This API does not require a request body.
 
-| 이름 | 종류 | 형식 | 필수 | 설명 |
+| Name | Type | Format | Required | Description |
 | --- | --- | --- | --- | --- |
-| internetgatewayId | URL | UUID | O | 삭제할 라우팅 테이블 ID |
-| tokenId | Header | String | O | 토큰 ID |
+| internetgatewayId | URL | UUID | O | Routing table to delete |
+| tokenId | Header | String | O | Token ID |
 
 
-#### 응답
+#### Response
 
-이 API는 응답 본문을 반환하지 않습니다.
+This API does not return a response body.
 
 ---
