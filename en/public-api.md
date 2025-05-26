@@ -13,7 +13,7 @@ In each API response, you may find fields that are not specified within this gui
 ## Internet Gateway
 ### Get an external network ID
 When creating an Internet Gateway, you must specify the ID of the external network to connect through the Internet Gateway.
-The available external networks can be queried by specifying the `router:external=true` query to [the VPC list view API](/Network/VPC/ko/public-api/#vpc_1).
+The available external networks can be queried by specifying the `router:external=true` query to [the VPC list view API](/Network/VPC/en/public-api/#vpc_1).
 ```
 GET /v2.0/vpcs?router:external=true
 ```
