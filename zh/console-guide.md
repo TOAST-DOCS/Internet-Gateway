@@ -40,6 +40,7 @@ An internet gateway can be deleted regardless of its status of association with 
 2. Click **Delete Internet Gateway**.
 3. Click **Confirm** to delete the internet gateway.
 
+<a id='restarting-guide-for-maintenance'></a>
 ### Restart Internet Gateways for Server Maintenance
 
 NHN Cloud updates software of the internet gateway server on a regular basis to enhance security and reliability of its infrastructure services.
