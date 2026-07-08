@@ -1,4 +1,5 @@
-## Network > Internet Gateway > 概要
+<a id="network-internet-gateway-overview"></a>
+## Network > Internet Gateway > 概要 { #network-internet-gateway-overview }
 
 インターネットゲートウェイを利用して、VPCのリソースをインターネットに接続できます。インターネットゲートウェイを介してインターネットに接続可能なインスタンス、ロードバランサーにFloating IPを接続して外部にサービスを提供できます。
 

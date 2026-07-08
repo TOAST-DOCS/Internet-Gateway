@@ -1,4 +1,5 @@
-## Network > Internet Gateway > 개요
+<a id="network-internet-gateway-overview"></a>
+## Network > Internet Gateway > 개요 { #network-internet-gateway-overview }
 
 인터넷 게이트웨이를 이용하여 VPC의 리소스를 인터넷에 연결할 수 있습니다. 인터넷 게이트웨이를 통해 인터넷에 연결 가능한 인스턴스, 로드 밸런서에 플로팅 IP를 연결하여 외부에 서비스를 제공할 수 있습니다.
 

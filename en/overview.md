@@ -1,4 +1,5 @@
-## Network > Internet Gateway > Overview
+<a id="network-internet-gateway-overview"></a>
+## Network > Internet Gateway > Overview { #network-internet-gateway-overview }
 
 You can use an internet gateway to connect resources in your VPC to the internet. You can provide services to the outside by associating floating IPs with instances and load balancers that can connect to the internet through an internet gateway.
 

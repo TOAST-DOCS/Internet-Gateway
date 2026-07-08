@@ -1,4 +1,5 @@
-## Network > Internet Gateway > API v2 가이드
+<a id="network-internet-gateway-api-v2-guide"></a>
+## Network > Internet Gateway > API v2 가이드 { #network-internet-gateway-api-v2-guide }
 
 NHN Cloud Network 서비스는 API 호출 시 인증/인가를 위해 IaaS 토큰을 사용합니다. IaaS 토큰은 NHN Cloud의 OpenStack 기반 인프라 서비스(IaaS)에서 사용하는 인증 토큰입니다. IaaS 토큰 발급 및 사용에 대한 자세한 내용은 [IaaS 토큰](/nhncloud/ko/public-api/iaas-token)을 참고하세요.
 
@@ -10,21 +11,25 @@ NHN Cloud Network 서비스는 API 호출 시 인증/인가를 위해 IaaS 토�
 
 API 응답에 가이드에 명시되지 않은 필드가 나타날 수 있습니다. 이런 필드는 NHN Cloud 내부 용도로 사용되며 사전 공지 없이 변경될 수 있으므로 사용하지 않습니다.
 
-## 인터넷 게이트웨이
-### 외부 네트워크 ID 조회하기
+<a id="internet-gateway"></a>
+## 인터넷 게이트웨이 { #internet-gateway }
+<a id="get-an-external-network-id"></a>
+### 외부 네트워크 ID 조회하기 { #get-an-external-network-id }
 인터넷 게이트웨이를 생성할 때, 인터넷 게이트웨이를 통해 연결할 외부 네트워크의 ID를 지정해야 합니다.
 사용할 수 있는 외부 네트워크는 [VPC 목록 보기 API](/Network/VPC/ko/public-api/#vpc_1)에 `router:external=true` 쿼리를 지정하여 조회할 수 있습니다.
 ```
 GET /v2.0/vpcs?router:external=true
 ```
 
-### 인터넷 게이트웨이 목록 보기
+<a id="get-a-list-of-internet-gateways"></a>
+### 인터넷 게이트웨이 목록 보기 { #get-a-list-of-internet-gateways }
 사용 가능한 인터넷 게이트웨이 목록을 반환합니다.
 ```
 GET /v2.0/internetgateways
 X-Auth-Token: {tokenId}
 ```
 
+<a id="get-a-list-of-internet-gateways-request"></a>
 #### 요청
 이 API는 요청 본문을 요구하지 않습니다.
 
@@ -38,6 +43,7 @@ X-Auth-Token: {tokenId}
 | external_network_id | Query | UUID | - | 조회할 인터넷 게이트웨이가 연결한 외부 네트워크의 ID |
 | routingtable_id | Query | UUID | - | 조회할 인터넷 게이트웨이를 연결한 라우팅 테이블의 ID |
 
+<a id="get-a-list-of-internet-gateways-response"></a>
 #### 응답
 
 | 이름 | 종류 | 형식 | 설명 |
@@ -79,13 +85,15 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### 인터넷 게이트웨이 보기
+<a id="view-internet-gateways"></a>
+### 인터넷 게이트웨이 보기 { #view-internet-gateways }
 지정한 인터넷 게이트웨이를 조회합니다.
 ```
 GET /v2.0/internetgateways/{internetgatewayId}
 X-Auth-Token: {tokenId}
 ```
 
+<a id="view-internet-gateways-request"></a>
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -95,6 +103,7 @@ X-Auth-Token: {tokenId}
 | internetgatewayId | URL | UUID | O | 조회할 라우팅 테이블 ID |
 | tokenId | Header | String | O | 토큰 ID |
 
+<a id="view-internet-gateways-response"></a>
 #### 응답
 
 | 이름 | 종류 | 형식 | 설명 |
@@ -134,7 +143,8 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### 인터넷 게이트웨이 생성하기
+<a id="create-an-internet-gateway"></a>
+### 인터넷 게이트웨이 생성하기 { #create-an-internet-gateway }
 
 새로운 인터넷 게이트웨이를 생성합니다.
 
@@ -143,6 +153,7 @@ POST /v2.0/internetgateways
 X-Auth-Token: {tokenId}
 ```
 
+<a id="create-an-internet-gateway-request"></a>
 #### 요청
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -152,6 +163,7 @@ X-Auth-Token: {tokenId}
 | internetgateway.name | Body | String | O | 인터넷 게이트웨이 이름 |
 | internetgateway.external_network_id | Body | O | UUID | 인터넷 게이트웨이가 연결할 외부 네트워크 ID |
 
+<a id="create-an-internet-gateway-response"></a>
 #### 응답
 
 | 이름 | 종류 | 형식 | 설명 |
@@ -189,7 +201,8 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### 인터넷 게이트웨이 삭제하기
+<a id="delete-an-internet-gateway"></a>
+### 인터넷 게이트웨이 삭제하기 { #delete-an-internet-gateway }
 
 인터넷 게이트웨이를 삭제합니다. 
 
@@ -198,6 +211,7 @@ DELETE /v2.0/internetgateways/{internetgatewayId}
 X-Auth-Token: {tokenId}
 ```
 
+<a id="delete-an-internet-gateway-request"></a>
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -208,6 +222,7 @@ X-Auth-Token: {tokenId}
 | tokenId | Header | String | O | 토큰 ID |
 
 
+<a id="delete-an-internet-gateway-response"></a>
 #### 응답
 
 이 API는 응답 본문을 반환하지 않습니다.

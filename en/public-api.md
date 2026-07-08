@@ -1,4 +1,5 @@
-## Network > Internet Gateway > API v2 Guide
+<a id="network-internet-gateway-api-v2-guide"></a>
+## Network > Internet Gateway > API v2 Guide { #network-internet-gateway-api-v2-guide }
 
 NHN Cloud Network services use IaaS tokens for authentication and authorization when making API calls. The IaaS token is an authentication token used for NHN Cloud's OpenStack-based infrastructure services (IaaS). For more information on issuing and using IaaS tokens, please refer to the [IaaS Token](/nhncloud/en/public-api/iaas-token).
 
@@ -10,21 +11,25 @@ For Internet Gateway APIs, the `network` type endpoint is used. For more details
 
 In each API response, you may find fields that are not specified within this guide. Those fields are for NHN Cloud internal usage, so refrain from using them because they may be changed without prior notice.
 
-## Internet Gateway
-### Get an external network ID
+<a id="internet-gateway"></a>
+## Internet Gateway { #internet-gateway }
+<a id="get-an-external-network-id"></a>
+### Get an external network ID { #get-an-external-network-id }
 When creating an Internet Gateway, you must specify the ID of the external network to connect through the Internet Gateway.
 The available external networks can be queried by specifying the `router:external=true` query to [the VPC list view API](/Network/VPC/en/public-api/#vpc_1).
 ```
 GET /v2.0/vpcs?router:external=true
 ```
 
-### Get a list of Internet Gateways
+<a id="get-a-list-of-internet-gateways"></a>
+### Get a list of Internet Gateways { #get-a-list-of-internet-gateways }
 Returns a list of available internet gateways.
 ```
 GET /v2.0/internetgateways
 X-Auth-Token: {tokenId}
 ```
 
+<a id="get-a-list-of-internet-gateways-request"></a>
 #### Request
 This API does not require a request body.
 
@@ -38,6 +43,7 @@ This API does not require a request body.
 | external_network_id | Query | UUID | - | The ID of the external network to which the internet gateway is connected. |
 | routingtable_id | Query | UUID | - | The ID of the routing table associated with the internet gateway to look up. |
 
+<a id="get-a-list-of-internet-gateways-response"></a>
 #### Response
 
 | Name | Type | Format | Description |
@@ -79,13 +85,15 @@ This API does not require a request body.
 
 ---
 
-### View Internet Gateways
+<a id="view-internet-gateways"></a>
+### View Internet Gateways { #view-internet-gateways }
 Looks up the specified internet gateway.
 ```
 GET /v2.0/internetgateways/{internetgatewayId}
 X-Auth-Token: {tokenId}
 ```
 
+<a id="view-internet-gateways-request"></a>
 #### Request
 
 This API does not require a request body.
@@ -95,6 +103,7 @@ This API does not require a request body.
 | internetgatewayId | URL | UUID | O | Routing table ID to query |
 | tokenId | Header | String | O | Token ID |
 
+<a id="view-internet-gateways-response"></a>
 #### Response
 
 | Name | Type | Format | Description |
@@ -134,7 +143,8 @@ This API does not require a request body.
 
 ---
 
-### Create an Internet gateway
+<a id="create-an-internet-gateway"></a>
+### Create an Internet gateway { #create-an-internet-gateway }
 
 Create a new internet gateway.
 
@@ -143,6 +153,7 @@ POST /v2.0/internetgateways
 X-Auth-Token: {tokenId}
 ```
 
+<a id="create-an-internet-gateway-request"></a>
 #### Request
 
 | Name | Type | Format | Required | Description |
@@ -152,6 +163,7 @@ X-Auth-Token: {tokenId}
 | internetgateway.name | Body | String | O | Internet gateway name |
 | internetgateway.external_network_id | Body | O | UUID | The external network ID for the internet gateway to connect to |
 
+<a id="create-an-internet-gateway-response"></a>
 #### Response
 
 | Name | Type | Format | Description |
@@ -189,7 +201,8 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### Delete an Internet gateway
+<a id="delete-an-internet-gateway"></a>
+### Delete an Internet gateway { #delete-an-internet-gateway }
 
 Delete the internet gateway. 
 
@@ -198,6 +211,7 @@ DELETE /v2.0/internetgateways/{internetgatewayId}
 X-Auth-Token: {tokenId}
 ```
 
+<a id="delete-an-internet-gateway-request"></a>
 #### Request
 
 This API does not require a request body.
@@ -208,6 +222,7 @@ This API does not require a request body.
 | tokenId | Header | String | O | Token ID |
 
 
+<a id="delete-an-internet-gateway-response"></a>
 #### Response
 
 This API does not return a response body.

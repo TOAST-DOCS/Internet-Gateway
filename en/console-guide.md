@@ -1,18 +1,19 @@
-## Network > Internet Gateway > Console User Guide
+<a id="network-internet-gateway-console-user-guide"></a>
+## Network > Internet Gateway > Console User Guide { #network-internet-gateway-console-user-guide }
 
 This guide describes how to use the Internet Gateway service from the console.
 
 <a id="management"></a>
-## Manage Internet Gateways
+## Manage Internet Gateways { #management }
 <a id="create"></a>
-### Create an Internet Gateway
+### Create an Internet Gateway { #create }
 1. To create an internet gateway, click **Create Internet Gateway** and enter values for the following items.
     * **Name**: Enter the name of the internet gateway.
     * **External Network**: Select the external network to which the internet gateway will be connected, from the list of predefined external networks. NHN Cloud currently operates 1 "Public Network" that can connect to the internet.
 2. Click **Confirm** to create the internet gateway.
 
 <a id="connect"></a>
-### Attach an Internet Gateway
+### Attach an Internet Gateway { #connect }
 You can use an internet gateway by associating it with a routing table. When the internet gateway is associated with a routing table, it is assigned a public IP for internet access and adds the network configuration to the routing table with which it is associated.
 Association of internet gateway and routing table is provided in the **VPC > Routing** menu.
 
@@ -29,7 +30,7 @@ When the internet gateway is attached, a route entry for internet connection is 
 This route cannot be deleted manually. It is automatically deleted when the internet gateway is detached.
 
 <a id="disconnect"></a>
-### Detach an Internet Gateway
+### Detach an Internet Gateway { #disconnect }
 You can disassociate a routing table from an internet gateway. However, if there are instances or load balancers that associated floating IPs with subnets associated with the routing table, you can disassociate the routing table from the internet gateway after disassociating all the floating IPs.
 Disassociation of internet gateway and routing table is provided in the **VPC > Routing** menu.
 
@@ -39,7 +40,7 @@ Disassociation of internet gateway and routing table is provided in the **VPC > 
 When the internet gateway is detached, the route entry for internet connection is deleted from the **Route** list in the routing table.
 
 <a id="delete"></a>
-### Delete an Internet Gateway
+### Delete an Internet Gateway { #delete }
 An internet gateway can be deleted regardless of its status of association with a routing table. If you delete an internet gateway associated with a routing table, it is automatically disassociated from the routing table and then deleted. So, similar to "Detach an Internet Gateway", if there are instances or load balancers that associated floating IPs with subnets associated with the routing table, you can delete the internet gateway after disassociating all the floating IPs.
 
 1. Select the internet gateway to delete.
@@ -47,7 +48,7 @@ An internet gateway can be deleted regardless of its status of association with 
 3. Click **Confirm** to delete the internet gateway.
 
 <a id="restarting-guide-for-maintenance"></a>
-### Restart Internet Gateways for Server Maintenance
+### Restart Internet Gateways for Server Maintenance { #restarting-guide-for-maintenance }
 
 NHN Cloud updates software of the internet gateway server on a regular basis to enhance security and reliability of its infrastructure services.
 Internet gateways that are running on a maintenance target server must be restarted and migrated to the server where maintenance has been completed.

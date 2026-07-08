@@ -1,5 +1,6 @@
 
-## Network > Internet Gateway > API v2ガイド
+<a id="network-internet-gateway-api-v2-guide"></a>
+## Network > Internet Gateway > API v2ガイド { #network-internet-gateway-api-v2-guide }
 
 NHN Cloud Networkサービスは、API呼び出し時の認証/認可のためにIaaSトークンを使用します。IaaSトークンは、NHN CloudのOpenStackベースのインフラサービス(IaaS)で使用する認証トークンです。IaaSトークンの発行及び使用に関する詳細は、[IaaSトークン](/nhncloud/ja/public-api/iaas-token)を参照してください。
 
@@ -11,8 +12,10 @@ NHN Cloud Networkサービスは、API呼び出し時の認証/認可のため�
 
 APIレスポンスにガイドに記載されていないフィールドが表示される場合があります。このようなフィールドは、NHN Cloudの内部用途に使用され、事前告知なしに変更される可能性があるため、使用しないでください。
 
-## インターネットゲートウェイ
-### 外部ネットワークIDを照会する
+<a id="internet-gateway"></a>
+## インターネットゲートウェイ { #internet-gateway }
+<a id="get-an-external-network-id"></a>
+### 外部ネットワークIDを照会する { #get-an-external-network-id }
 インターネットゲートウェイを作成する際、インターネットゲートウェイを介して接続する外部ネットワークのIDを指定する必要があります。
 使用可能な外部ネットワークは、[VPCリスト表示API](/Network/VPC/ja/public-api/#vpc_1)に`router:external=true`クエリを指定して照会できます。
 
@@ -20,7 +23,8 @@ APIレスポンスにガイドに記載されていないフィールドが表�
 GET /v2.0/vpcs?router:external=true
 ```
 
-### インターネットゲートウェイリスト表示
+<a id="get-a-list-of-internet-gateways"></a>
+### インターネットゲートウェイリスト表示 { #get-a-list-of-internet-gateways }
 利用可能なインターネットゲートウェイのリストを返します。
 
 ```
@@ -28,6 +32,7 @@ GET /v2.0/internetgateways
 X-Auth-Token: {tokenId}
 ```
 
+<a id="get-a-list-of-internet-gateways-request"></a>
 #### リクエスト
 このAPIはリクエスト本文を要求しません。
 
@@ -41,6 +46,7 @@ X-Auth-Token: {tokenId}
 | external_network_id | Query | UUID | - | 照会するインターネットゲートウェイが接続した外部ネットワークのID |
 | routingtable_id | Query | UUID | - | 照会するインターネットゲートウェイを接続したルーティングテーブルのID |
 
+<a id="get-a-list-of-internet-gateways-response"></a>
 #### レスポンス
 
 | 名前 | 種類 | 形式 | 説明 |
@@ -84,7 +90,8 @@ X-Auth-Token: {tokenId}
 ---
 
 
-### インターネットゲートウェイ表示
+<a id="view-internet-gateways"></a>
+### インターネットゲートウェイ表示 { #view-internet-gateways }
 指定したインターネットゲートウェイを照会します。
 
 ```
@@ -92,6 +99,7 @@ GET /v2.0/internetgateways/{internetgatewayId}
 X-Auth-Token: {tokenId}
 ```
 
+<a id="view-internet-gateways-request"></a>
 #### リクエスト
 
 このAPIはリクエスト本文を要求しません。
@@ -101,6 +109,7 @@ X-Auth-Token: {tokenId}
 | internetgatewayId | URL | UUID | O | 照会するルーティングテーブルID |
 | tokenId | Header | String | O | トークンID |
 
+<a id="view-internet-gateways-response"></a>
 #### レスポンス
 
 | 名前 | 種類 | 形式 | 説明 |
@@ -140,7 +149,8 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### インターネットゲートウェイの作成
+<a id="create-an-internet-gateway"></a>
+### インターネットゲートウェイの作成 { #create-an-internet-gateway }
 
 新しいインターネットゲートウェイを作成します。
 
@@ -150,6 +160,7 @@ X-Auth-Token: {tokenId}
 ```
 
 
+<a id="create-an-internet-gateway-request"></a>
 #### リクエスト
 
 | 名前 | 種類 | 形式 | 必須 | 説明 |
@@ -159,6 +170,7 @@ X-Auth-Token: {tokenId}
 | internetgateway.name | Body | String | O | インターネットゲートウェイ名 |
 | internetgateway.external_network_id | Body | O | UUID | インターネットゲートウェイが接続する外部ネットワークID |
 
+<a id="create-an-internet-gateway-response"></a>
 #### レスポンス
 
 | 名前 | 種類 | 形式 | 説明 |
@@ -197,7 +209,8 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### インターネットゲートウェイの削除
+<a id="delete-an-internet-gateway"></a>
+### インターネットゲートウェイの削除 { #delete-an-internet-gateway }
 
 インターネットゲートウェイを削除します。 
 
@@ -206,6 +219,7 @@ DELETE /v2.0/internetgateways/{internetgatewayId}
 X-Auth-Token: {tokenId}
 ```
 
+<a id="delete-an-internet-gateway-request"></a>
 #### リクエスト
 
 このAPIはリクエスト本文を要求しません。
@@ -216,6 +230,7 @@ X-Auth-Token: {tokenId}
 | tokenId | Header | String | O | トークンID |
 
 
+<a id="delete-an-internet-gateway-response"></a>
 #### レスポンス
 
 このAPIはレスポンス本文を返しません。
