@@ -169,7 +169,7 @@ X-Auth-Token: {tokenId}
 | tokenId | Header | String | O | トークンID |
 | internetgateway | Body | Object | O | 作成するインターネットゲートウェイ情報オブジェクト |
 | internetgateway.name | Body | String | O | インターネットゲートウェイ名 |
-| internetgateway.external_network_id | Body | O | UUID | インターネットゲートウェイが接続する外部ネットワークID |
+| internetgateway.external_network_id | Body | UUID | O | インターネットゲートウェイが接続する外部ネットワークID |
 
 <a id="create-an-internet-gateway-response"></a>
 #### レスポンス

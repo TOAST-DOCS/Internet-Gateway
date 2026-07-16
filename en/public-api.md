@@ -163,7 +163,7 @@ X-Auth-Token: {tokenId}
 | tokenId | Header | String | O | Token ID |
 | internetgateway | Body | Object | O | Internet gateway information object to create |
 | internetgateway.name | Body | String | O | Internet gateway name |
-| internetgateway.external_network_id | Body | O | UUID | The external network ID for the internet gateway to connect to |
+| internetgateway.external_network_id | Body | UUID | O | The external network ID for the internet gateway to connect to |
 
 <a id="create-an-internet-gateway-response"></a>
 #### Response
