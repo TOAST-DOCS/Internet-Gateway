@@ -150,7 +150,7 @@ X-Auth-Token: {tokenId}
 | tokenId | Header | String | O | 토큰 ID |
 | internetgateway | Body | Object | O | 생성할 인터넷 게이트웨이 정보 객체 |
 | internetgateway.name | Body | String | O | 인터넷 게이트웨이 이름 |
-| internetgateway.external_network_id | Body | O | UUID | 인터넷 게이트웨이가 연결할 외부 네트워크 ID |
+| internetgateway.external_network_id | Body | UUID | O | 인터넷 게이트웨이가 연결할 외부 네트워크 ID |
 
 #### 응답
 
