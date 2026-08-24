@@ -18,7 +18,7 @@ APIレスポンスにガイドに記載されていないフィールドが表�
 <a id="get-an-external-network-id"></a>
 ### 外部ネットワークIDを照会する { #get-an-external-network-id }
 インターネットゲートウェイを作成する際、インターネットゲートウェイを介して接続する外部ネットワークのIDを指定する必要があります。
-使用可能な外部ネットワークは、[VPCリスト表示API](/Network/VPC/ja/public-api/#vpc_1)に`router:external=true`クエリを指定して照会できます。
+使用可能な外部ネットワークは、[VPCリスト表示API](/Network/VPC/ja/public-api/#view-vpc-list)に`router:external=true`クエリを指定して照会できます。
 
 ```
 GET /v2.0/vpcs?router:external=true
