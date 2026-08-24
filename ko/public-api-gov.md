@@ -18,7 +18,7 @@ API 응답에 가이드에 명시되지 않은 필드가 나타날 수 있습니
 <a id="get-an-external-network-id"></a>
 ### 외부 네트워크 ID 조회하기 { #get-an-external-network-id }
 인터넷 게이트웨이를 생성할 때, 인터넷 게이트웨이를 통해 연결할 외부 네트워크의 ID를 지정해야 합니다.
-사용할 수 있는 외부 네트워크는 [VPC 목록 보기 API](/Network/VPC/ko/public-api-gov/#vpc_1)에 `router:external=true` 쿼리를 지정하여 조회할 수 있습니다.
+사용할 수 있는 외부 네트워크는 [VPC 목록 보기 API](/Network/VPC/ko/public-api-gov/#view-vpc-list)에 `router:external=true` 쿼리를 지정하여 조회할 수 있습니다.
 ```
 GET /v2.0/vpcs?router:external=true
 ```
